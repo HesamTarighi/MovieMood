@@ -41,17 +41,13 @@
 
     // computed and data
     const lastAirYear = computed(() => {
-        if (props.data.last_air_date) {
-            const year = props.data.last_air_date.split('-')[0]
-    
-            return year
-        }
+        const year = props.data.last_air_date.split('-')[0]
+
+        return year
     })
     const rating = computed(() => {
-        if (props.data.content_rating && props.data.origin_country) {
-            const content = props.data.content_rating.results.find(item => item.iso_3166_1 == props.data.origin_country[0].toUpperCase())
-    
-            return content
-        }
+        const content = props.data.content_rating.results.find(item => item.iso_3166_1 == props.data.origin_country[0].toUpperCase())
+
+        return content
     })
 </script>
