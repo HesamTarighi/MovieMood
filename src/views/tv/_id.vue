@@ -2,6 +2,7 @@
     <div data-theme="mytheme">
         <Layout>
             <main class="space-y-24">
+                {{ details }}
                 <!-- details -->
                 <MTDetails :data="details" />
                 <!-- trailers -->
@@ -27,6 +28,7 @@
     import MTSimilars from '@/components/sections/mt/Similars.vue'
     // composabels
     import api from '@/composabels/api.js'
+    import { isEmptyObject } from '@/composabels/validate_object.js'
     import { useRoute } from 'vue-router'
     import { ref } from 'vue'
 
@@ -38,5 +40,5 @@
 
     // use api
     tv.getDetails(id).then(response => Object.assign(details.value, response.data))
-    tv.getContentRating(id).then(response => Object.assign(details.value, { content_rating: response.data }))
+    tv.getContentRating(id).then(async response => Object.assign(details.value, { content_rating: response.data }))
 </script>
