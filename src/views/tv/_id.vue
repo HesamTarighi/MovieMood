@@ -15,7 +15,7 @@
                 <!-- episodes -->
                 <Suspense>
                     <template #default>
-                        <TvEpisodes :details="details" />
+                        <TvEpisodes :details="details" @getSeason="callSeason" :season="season" :id="id" />
                     </template>
                     <template #fallback>
                     </template>
@@ -44,12 +44,17 @@
     // data
     const route = useRoute()
     const tv = api.tv()
-    const details = ref({})
     const id = route.params.id
+    // response data
+        const details = ref({})
+        const season = ref([])
 
     // call api
     const callDetails = tv.getDetails(id).then(response => Object.assign(details.value, response.data))
     const callContentRating = tv.getContentRating(id).then(response => Object.assign(details.value, { content_rating: response.data }))
+    function callSeason (selectedSeason) {
+        return tv.getSeason(id, selectedSeason).then(response => season.value = response.data)
+    }
 
     // define async components
     const MTDetails = defineAsyncComponent(() => {

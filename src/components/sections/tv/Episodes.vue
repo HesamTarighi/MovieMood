@@ -3,11 +3,8 @@
         <T_Section :title="'Episodes'">
             <div class="space-y-8">
                 <div>
-                    <select class="select select-xs w-full max-w-xs focus:outline-none">
-                        <option disabled selected>Tiny</option>
-                        <option>Tiny Apple</option>
-                        <option>Tiny Orange</option>
-                        <option>Tiny Tomato</option>
+                    <select class="select select-sm w-full max-w-xs focus:outline-none" @change="onSelectSeason">
+                        <option v-for="(result, i) in details.seasons" :key="i" :selected="i == 0" :value="i + 1"> Season {{ i + 1 }} </option>
                     </select>
                 </div>
                 <div class="relative">
@@ -19,15 +16,13 @@
                     :pagination="swiperPagination"
                     @swiper="onSwiper"
                     >
-                        <SwiperSlide class="w-[450px]" v-for="result in 6" :key="result">
+                        <SwiperSlide class="w-[450px]" v-for="episode in season.episodes">
                             <a href="/" class="space-y-4">
-                                <img src="@/assets/images/peakyblinders.jpg" class="w-full h-[250px] rounded-2xl object-cover" />
+                                <V_Img :imagePath="`/original/${episode.still_path}`" class="w-full h-[250px] rounded-2xl object-cover" />
                                 <div>
-                                    <span class="text-xl font-pbsans"> Gangs of London : Sessons 2 </span>
+                                    <span class="text-xl font-pbsans"> {{ episode.episode_number }}. {{ episode.name }} </span>
                                 </div>
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat excepturi eveniet consequatur tempore
-                                </p>
+                                <p> {{ episode.overview }} </p>
                             </a>
                         </SwiperSlide>
                     </Swiper>
@@ -75,19 +70,26 @@
     // components
     import T_Section from '@/components/templates/T_Section.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
+    import V_Img from '@/components/data-display/ServerImage.vue'
     // modules
     import { Pagination } from 'swiper/modules'
     // Import styles
     import 'swiper/css';
     import 'swiper/css/pagination';
     // composabels
-    import { ref, defineProps } from 'vue'
+    import { ref, defineProps, defineEmits } from 'vue'
     import dynamicImage from '@/composabels/dynamic_image.js'
 
     // manage props
-    defineProps([
-        'data',
-        'type'
+    const props = defineProps([
+        'details',
+        'type',
+        'id',
+        'season'
+    ])
+    // manage emits
+    const emits = defineEmits([
+        'getSeason'
     ])
 
     // data
@@ -96,9 +98,18 @@
     const swiperPagination = {
         clickable: true,
     }
+    const selectedSeason = ref(1)
+
+    // use emit
+    emits('getSeason', selectedSeason.value)
 
     // use events
     function onSwiper (data) {
         swiper.value = data
+    }
+    function onSelectSeason (e) {
+        selectedSeason.value = e.target.value
+
+        emits('getSeason', selectedSeason.value)
     }
 ;</script>

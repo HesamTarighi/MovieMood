@@ -9,9 +9,12 @@ function tv () {
     function getPopular () {
         return axios.get('/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc')
     }
+    function getSeason (id, seasonNumber) {
+        return axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`)
+    }
 
     return {
-        getDetails, getPopular, getContentRating
+        getDetails, getPopular, getContentRating, getSeason
     }
 }
 
