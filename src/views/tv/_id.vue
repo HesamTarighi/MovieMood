@@ -3,7 +3,6 @@
         <Layout>
             <main class="space-y-24">
                 <!-- details -->
-                <Skeleton />
                 <Suspense>
                     <template #default>
                         <MTDetails :data="details" />
@@ -14,7 +13,13 @@
                 <!-- trailers -->
                 <TvTrailers />
                 <!-- episodes -->
-                <TvEpisodes />
+                <Suspense>
+                    <template #default>
+                        <TvEpisodes :details="details" />
+                    </template>
+                    <template #fallback>
+                    </template>
+                </Suspense>
                 <!-- cast -->
                 <MTCast />
                 <!-- similars -->
@@ -31,7 +36,6 @@
     import TvEpisodes from '@/components/sections/tv/Episodes.vue'
     import MTCast from '@/components/sections/mt/Cast.vue'
     import MTSimilars from '@/components/sections/mt/Similars.vue'
-    import Skeleton from '@/components/feedback/skeleton/RectangleContent.vue'
     // composabels
     import api from '@/composabels/api.js'
     import { useRoute } from 'vue-router'
