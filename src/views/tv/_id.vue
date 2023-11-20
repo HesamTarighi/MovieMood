@@ -8,25 +8,31 @@
                         <MTDetails :data="details" />
                     </template>
                     <template #fallback>
-                        <Loading class="absolute x-center" />
+                        <div class="w-full flex justify-center">
+                            <Loading />
+                        </div>
                     </template>
                 </Suspense>
                 <!-- trailers -->
                 <Suspense>
                     <template #default>
-                        <TvTrailers :data="trailers" />
+                        <TVTrailers :data="trailers" />
                     </template>
                     <template #fallback>
-                        <Loading class="absolute x-center" />
+                        <div class="w-full flex justify-center">
+                            <Loading />
+                        </div>
                     </template>
                 </Suspense>
                 <!-- episodes -->
                 <Suspense>
                     <template #default>
-                        <TvEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" />
+                        <TVEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" />
                     </template>
                     <template #fallback>
-                        <Loading class="absolute x-center" />
+                        <div class="w-full flex justify-center">
+                            <Loading />
+                        </div>
                     </template>
                 </Suspense>
                 <!-- cast -->
@@ -41,7 +47,6 @@
 <script setup>
     // components
     import Layout from '@/layouts/default.vue'
-    import TvEpisodes from '@/components/sections/tv/Episodes.vue'
     import MTCast from '@/components/sections/mt/Cast.vue'
     import MTSimilars from '@/components/sections/mt/Similars.vue'
     import Loading from '@/components/feedback/loading/Bars.vue'
@@ -72,7 +77,10 @@
     const MTDetails = defineAsyncComponent(() => {
         return Promise.all([callDetailsApi, callContentRatingApi]).then(() => import('@/components/sections/mt/Details.vue'))
     })
-    const TvTrailers = defineAsyncComponent(() => {
+    const TVTrailers = defineAsyncComponent(() => {
         return Promise.all([callVideosApi]).then(() => import('@/components/sections/tv/Trailers.vue'))
+    })
+    const TVEpisodes = defineAsyncComponent(() => {
+        return Promise.all([callSeasonApi(1)]).then(() => import('@/components/sections/tv/Episodes.vue'))
     })
 ;</script>

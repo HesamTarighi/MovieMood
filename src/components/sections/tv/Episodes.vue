@@ -29,7 +29,6 @@
                     <button
                     @click="swiper.slidePrev()"
                     class="btn btn-primary w-[60px] h-[60px] rounded-full border-0 mx-4 flex justify-center items-center absolute left-0 top-[35%] z-10"
-                    v-show="swiper.activeIndex != 0"
                     >
                         <img :src="dynamicImage('icons/chervon-left.png')" class="w-[30px] h-[30px]" />
                     </button>
@@ -106,6 +105,7 @@
     // use events
     function onSwiper (data) {
         swiper.value = data
+        console.log(data)
     }
     function onSelectSeason (e) {
         selectedSeason.value = e.target.value

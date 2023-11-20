@@ -1,7 +1,7 @@
 <template>
     <div>
         <T_Section :title="'Trailers'">
-            <div v-if="data && data != ''">
+            <div>
                 <!-- trailers -->
                 <swiper
                 :slides-per-view="2"
@@ -13,7 +13,7 @@
                 >
                     <swiper-slide v-for="(result, i) in data.results" :key="i">
                         <a href="/" class="space-y-4">
-                            <YoutubeVideo :videoKey="result.key" class="h-[350px]" />
+                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="result.key" class="h-[350px]" />
                             <div>
                                 <span class="text-xl font-pbsans"> {{ result.name }} </span>
                             </div>
