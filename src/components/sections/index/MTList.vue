@@ -9,8 +9,8 @@
             :modules="swiperModules"
             :pagination="swiperPagination"
             >
-            <swiper-slide v-for="(result, i) in data.results" :key="i"> <Card :data="result" :type="type" /> </swiper-slide>
-        </swiper>
+                <swiper-slide v-for="(result, i) in data.results" :key="i"> <Card :data="result" :type="type" /> </swiper-slide>
+            </swiper>
         </div>
     </T_Section>
 </template>
