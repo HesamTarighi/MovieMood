@@ -7,7 +7,7 @@
                         <option v-for="(result, i) in details.seasons" :key="i" :selected="i == 0" :value="i + 1"> Season {{ i + 1 }} </option>
                     </select>
                 </div>
-                <div class="relative">
+                <div class="relative" v-if="dataStatus == 'SUCCESS'">
                     <Swiper
                     :slides-per-group="1"
                     :slides-per-view="'auto'"
@@ -38,6 +38,11 @@
                     >
                         <img :src="dynamicImage('icons/chervon-right.png')" class="w-[30px] h-[30px]" />
                     </button>
+                </div>
+                <div v-else-if="dataStatus == 'LOADING'">
+                    <div class="w-full flex justify-center">
+                        <span class="loading loading-ring loading-lg"></span>
+                    </div>
                 </div>
             </div>
         </T_Section>
@@ -70,6 +75,7 @@
     import T_Section from '@/components/templates/T_Section.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     import V_Img from '@/components/data-display/ServerImage.vue'
+    import Loading from '@/components/feedback/loading/Bars.vue'
     // modules
     import { Pagination } from 'swiper/modules'
     // Import styles
@@ -79,13 +85,16 @@
     import { ref, defineProps, defineEmits } from 'vue'
     import dynamicImage from '@/composabels/dynamic_image.js'
 
+    
     // manage props
     const props = defineProps([
         'details',
         'type',
         'id',
-        'season'
+        'season',
+        'dataStatus'
     ])
+
     // manage emits
     const emits = defineEmits([
         'getSeason'
@@ -97,7 +106,7 @@
     const swiperPagination = {
         clickable: true,
     }
-    const selectedSeason = ref(1)
+    const selectedSeason = ref(0)
 
     // use emit
     emits('getSeason', selectedSeason.value)
@@ -105,11 +114,11 @@
     // use events
     function onSwiper (data) {
         swiper.value = data
-        console.log(data)
     }
     function onSelectSeason (e) {
-        selectedSeason.value = e.target.value
+        selectedSeason.value = e.target.value -1
 
         emits('getSeason', selectedSeason.value)
+        emits('changeDataStatus', 'LOADING')
     }
 ;</script>

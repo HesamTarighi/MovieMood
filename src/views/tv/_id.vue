@@ -27,11 +27,11 @@
                 <!-- episodes -->
                 <Suspense>
                     <template #default>
-                        <TVEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" />
+                        <TVEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" :dataStatus="episodeDataStatus" @changeDataStatus="changeDataStatus" />
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
-                            <Loading />
+                            <span class="loading loading-bars loading-lg"></span>
                         </div>
                     </template>
                 </Suspense>
@@ -60,17 +60,27 @@
     const route = useRoute()
     const tv = api.tv()
     const id = route.params.id
+    const episodeDataStatus = ref("LOADING")
     // response data
         const details = ref({})
         const trailers = ref({})
         const season = ref([])
+
+    // functions
+    function changeDataStatus (status) {
+        console.log(status)
+        episodeDataStatus.value = status
+    }
 
     // call api
     const callDetailsApi = tv.getDetails(id).then(response => Object.assign(details.value, response.data))
     const callContentRatingApi = tv.getContentRating(id).then(response => Object.assign(details.value, { content_rating: response.data }))
     const callVideosApi = tv.getVideos(id).then(response => trailers.value = response.data)
     function callSeasonApi (selectedSeason) {
-        return tv.getSeason(id, selectedSeason).then(response => season.value = response.data)
+        return tv.getSeason(id, selectedSeason).then(response => {
+            season.value = response.data
+            changeDataStatus('SUCCESS')
+        })
     }
 
     // define async components
@@ -81,6 +91,6 @@
         return Promise.all([callVideosApi]).then(() => import('@/components/sections/tv/Trailers.vue'))
     })
     const TVEpisodes = defineAsyncComponent(() => {
-        return Promise.all([callSeasonApi(1)]).then(() => import('@/components/sections/tv/Episodes.vue'))
+        return Promise.all([callSeasonApi(0)]).then(() => import('@/components/sections/tv/Episodes.vue'))
     })
 ;</script>
