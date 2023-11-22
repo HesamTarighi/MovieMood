@@ -75,7 +75,6 @@
     import T_Section from '@/components/templates/T_Section.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     import V_Img from '@/components/data-display/ServerImage.vue'
-    import Loading from '@/components/feedback/loading/Bars.vue'
     // modules
     import { Pagination } from 'swiper/modules'
     // Import styles

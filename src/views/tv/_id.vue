@@ -9,7 +9,7 @@
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
-                            <Loading />
+                            <span class="loading loading-bars loading-lg"></span>
                         </div>
                     </template>
                 </Suspense>
@@ -20,7 +20,7 @@
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
-                            <Loading />
+                            <span class="loading loading-bars loading-lg"></span>
                         </div>
                     </template>
                 </Suspense>
@@ -36,7 +36,16 @@
                     </template>
                 </Suspense>
                 <!-- cast -->
-                <MTCast />
+                <Suspense>
+                    <template #default>
+                        <MTCast :data="credits" />
+                    </template>
+                    <template #fallback>
+                        <div class="w-full flex justify-center">
+                            <span class="loading loading-bars loading-lg"></span>
+                        </div>
+                    </template>
+                </Suspense>
                 <!-- similars -->
                 <MTSimilars />
             </main>
@@ -47,9 +56,7 @@
 <script setup>
     // components
     import Layout from '@/layouts/default.vue'
-    import MTCast from '@/components/sections/mt/Cast.vue'
     import MTSimilars from '@/components/sections/mt/Similars.vue'
-    import Loading from '@/components/feedback/loading/Bars.vue'
     // composabels
     import api from '@/composabels/api.js'
     import { isEmptyObject } from '@/composabels/validate_object.js'
@@ -65,6 +72,7 @@
         const details = ref({})
         const trailers = ref({})
         const season = ref([])
+        const credits = ref([])
 
     // functions
     function changeDataStatus (status) {
@@ -76,6 +84,7 @@
     const callDetailsApi = tv.getDetails(id).then(response => Object.assign(details.value, response.data))
     const callContentRatingApi = tv.getContentRating(id).then(response => Object.assign(details.value, { content_rating: response.data }))
     const callVideosApi = tv.getVideos(id).then(response => trailers.value = response.data)
+    const callCreditsApi = tv.getCredits(id).then(response => credits.value = response.data)
     function callSeasonApi (selectedSeason) {
         return tv.getSeason(id, selectedSeason).then(response => {
             season.value = response.data
@@ -92,5 +101,8 @@
     })
     const TVEpisodes = defineAsyncComponent(() => {
         return Promise.all([callSeasonApi(0)]).then(() => import('@/components/sections/tv/Episodes.vue'))
+    })
+    const MTCast = defineAsyncComponent(() => {
+        return Promise.all([callCreditsApi]).then(() => import('@/components/sections/mt/Cast.vue'))
     })
 ;</script>

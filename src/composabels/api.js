@@ -12,13 +12,15 @@ function tv () {
     function getVideos (id) {
         return axios.get(`https://api.themoviedb.org/3/tv/${id}/videos`)
     }
-
+    function getCredits (id) {
+        return axios.get(`https://api.themoviedb.org/3/tv/${id}/credits`)
+    }
     function getSeason (id, seasonNumber) {
         return axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`)
     }
 
     return {
-        getDetails, getPopular, getContentRating, getSeason, getVideos
+        getDetails, getPopular, getContentRating, getSeason, getVideos, getCredits
     }
 }
 
