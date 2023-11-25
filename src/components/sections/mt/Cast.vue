@@ -46,4 +46,4 @@
     const swiperPagination = {
         clickable: true,
     }
-</script>
+;</script>

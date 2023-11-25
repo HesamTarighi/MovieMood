@@ -18,9 +18,12 @@ function tv () {
     function getSeason (id, seasonNumber) {
         return axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`)
     }
+    function getSimilar (id) {
+        return axios.get(`https://api.themoviedb.org/3/tv/${id}/recommendations`)
+    }
 
     return {
-        getDetails, getPopular, getContentRating, getSeason, getVideos, getCredits
+        getDetails, getPopular, getContentRating, getSeason, getVideos, getCredits, getSimilar
     }
 }
 

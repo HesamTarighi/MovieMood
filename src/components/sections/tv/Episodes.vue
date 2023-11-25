@@ -13,7 +13,7 @@
                     :slides-per-view="'auto'"
                     :space-between="10"
                     :modules="swiperModules"
-                    :pagination="swiperPagination"
+                    :scrollbar="swiperScrollbar"
                     @swiper="onSwiper"
                     >
                         <SwiperSlide class="w-[450px]" v-for="episode in season.episodes">
@@ -49,21 +49,6 @@
     </div>
 </template>
 
-<style>
-    .swiper {
-        @apply overflow-y-visible;
-    }
-    .swiper-pagination {
-        bottom: -2rem !important;
-    }
-    .swiper-pagination-bullet {
-        @apply bg-white opacity-80 w-3 rounded-[1000px];
-    }
-    .swiper-pagination-bullet-active {
-        @apply bg-primary w-5 rounded-[1000px] opacity-100;
-    }
-</style>
-
 <style scoped>
     button {
         padding: 0 !important;
@@ -76,14 +61,13 @@
     import { Swiper, SwiperSlide } from 'swiper/vue'
     import V_Img from '@/components/data-display/ServerImage.vue'
     // modules
-    import { Pagination } from 'swiper/modules'
+    import { Scrollbar } from 'swiper/modules'
     // Import styles
-    import 'swiper/css';
-    import 'swiper/css/pagination';
+    import 'swiper/css'
+    import 'swiper/css/scrollbar'
     // composabels
     import { ref, defineProps, defineEmits } from 'vue'
     import dynamicImage from '@/composabels/dynamic_image.js'
-
     
     // manage props
     const props = defineProps([
@@ -101,9 +85,9 @@
 
     // data
     const swiper = ref({})
-    const swiperModules = [ Pagination ]
-    const swiperPagination = {
-        clickable: true,
+    const swiperModules = [ Scrollbar ]
+    const swiperScrollbar = {
+        draggable: true,
     }
     const selectedSeason = ref(0)
 

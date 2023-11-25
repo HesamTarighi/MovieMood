@@ -15,21 +15,6 @@
     </T_Section>
 </template>
 
-<style>
-    .swiper {
-        @apply overflow-y-visible;
-    }
-    .swiper-pagination {
-        bottom: -2rem !important;
-    }
-    .swiper-pagination-bullet {
-        @apply bg-white opacity-80 w-3 rounded-[1000px];
-    }
-    .swiper-pagination-bullet-active {
-        @apply bg-primary w-5 rounded-[1000px] opacity-100;
-    }
-</style>
-
 <script setup>
     // components
     import T_Section from '@/components/templates/T_Section.vue'

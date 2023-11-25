@@ -5,7 +5,7 @@
                 <!-- hero section -->
                 <Hero />
                 <!-- Tv list ** popular ** -->
-                <MTList :title="'Popular'" :data="popularMovieData" :type="'tv'" />
+                <List :title="'Popular'" :data="popularMovieData" :type="'tv'" />
                 <!-- Plans -->
                 <Plans :title="'Tariff plans'" />
                 <!-- questions -->
@@ -21,7 +21,7 @@
     // components
     import Layout from '@/layouts/default.vue'
     import Hero from '@/components/sections/index/Hero.vue'
-    import MTList from '@/components/sections/index/MTList.vue'
+    import List from '@/components/sections/index/List.vue'
     import Plans from '@/components/sections/index/Plans.vue'
     import Questions from '@/components/sections/index/Questions.vue'
     import Subscription from '@/components/sections/index/Subscription.vue'

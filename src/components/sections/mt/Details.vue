@@ -50,4 +50,4 @@
 
         return content
     })
-</script>
+;</script>
