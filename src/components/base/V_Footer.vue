@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <div class="w-lg mx-auto border-t-2 border-white/50 py-[30px] footer flex justify-between">
+        <div class="w-lg mx-auto border-t border-white/10 py-[30px] footer flex justify-between">
             <aside class="space-y-2">
                 <a href="/">
                     <img :src="dynamicImage('logo/moviemood.png')" class="w-[200px]" />

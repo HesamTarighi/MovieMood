@@ -4,7 +4,7 @@
             <div class="py-2">
                 <V_Img :image-path="`original/${data.poster_path}`" class="w-[400px] h-[400px] rounded-lg object-cover" />
             </div>
-            <span class="font-pbsans"> {{ data.name }} </span>
+            <span class="font-pbsans"> {{ data.name || data.original_title }} </span>
         </a>
     </div>
 </template>

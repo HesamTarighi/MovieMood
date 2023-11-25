@@ -28,9 +28,12 @@ function movie () {
     function getPopular () {
         return axios.get('/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc')
     }
+    function getNew () {
+        return axios.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&primary_release_year=${new Date().getFullYear()}`)
+    }
 
     return {
-        getPopular
+        getPopular, getNew
     }
 }
 
