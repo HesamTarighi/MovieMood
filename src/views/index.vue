@@ -10,7 +10,7 @@
                 <!-- Tv list ** new ** -->
                 <List :title="'New Movies'" :data="newMovieData" :type="'movie'" />
                 <!-- Plans -->
-                <Plans :title="'Tariff plans'" />
+                <!-- <Plans :title="'Tariff plans'" /> -->
                 <!-- questions -->
                 <Questions :title="'Frequently asked questions'" />
                 <!-- subscription -->
