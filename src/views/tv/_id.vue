@@ -59,7 +59,6 @@
     import MTSimilars from '@/components/sections/mt/Similars.vue'
     // composabels
     import api from '@/composabels/api.js'
-    import { isEmptyObject } from '@/composabels/validate_object.js'
     import { useRoute } from 'vue-router'
     import { ref, defineAsyncComponent } from 'vue'
     
@@ -100,7 +99,7 @@
         return Promise.all([callVideosApi]).then(() => import('@/components/sections/tv/Trailers.vue'))
     })
     const TVEpisodes = defineAsyncComponent(() => {
-        return Promise.all([callSeasonApi(0)]).then(() => import('@/components/sections/tv/Episodes.vue'))
+        return Promise.all([callSeasonApi(1)]).then(() => import('@/components/sections/tv/Episodes.vue'))
     })
     const MTCast = defineAsyncComponent(() => {
         return Promise.all([callCreditsApi]).then(() => import('@/components/sections/mt/Cast.vue'))

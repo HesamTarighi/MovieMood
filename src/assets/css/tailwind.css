@@ -16,6 +16,10 @@
             color: #ffffff !important;
         }
 
+        [data-theme="mytheme"] .btn-secondary:hover {
+            @apply bg-secondary/90;
+        }
+
     /* customize text */
         [data-theme="mytheme"] .link {
             @apply text-[#ffffff];

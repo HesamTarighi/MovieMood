@@ -5,17 +5,17 @@
                 <!-- trailers -->
                 <swiper
                 :slides-per-view="2"
-                :slides-per-group="2"
+                :slides-per-group="1"
                 :loop="true"
                 :space-between="10"
                 :modules="swiperModules"
                 :pagination="swiperPagination"
                 >
-                    <swiper-slide v-for="(result, i) in data.results" :key="i">
+                    <swiper-slide v-for="(trailer, i) in trailers" :key="i">
                         <a href="/" class="space-y-4">
-                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="result.key" class="h-[350px]" />
+                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="trailer.key" class="h-[350px]" />
                             <div>
-                                <span class="text-xl font-pbsans"> {{ result.name }} </span>
+                                <span class="text-xl font-pbsans"> {{ trailer.name }} </span>
                             </div>
                         </a>
                     </swiper-slide>
@@ -31,7 +31,7 @@
     import YoutubeVideo from '@/components/data-display/YoutubeVideo.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     // composabels
-    import { defineProps } from 'vue'
+    import { defineProps, computed } from 'vue'
     // modules
     import { Pagination } from 'swiper/modules'
     // styles
@@ -39,7 +39,7 @@
     import 'swiper/css/pagination';
 
     // manage props
-    defineProps([
+    const props = defineProps([
         'data'
     ])
 
@@ -48,4 +48,9 @@
     const swiperPagination = {
         clickable: true,
     }
-</script>
+
+    // computed
+    const trailers = computed(() => {
+        return props.data.results.filter(result => result.type == 'Trailer')
+    })
+;</script>
