@@ -89,7 +89,7 @@
     const swiperScrollbar = {
         draggable: true,
     }
-    const selectedSeason = ref(0)
+    const selectedSeason = ref(1)
 
     // use emit
     emits('getSeason', selectedSeason.value)
@@ -99,7 +99,7 @@
         swiper.value = data
     }
     function onSelectSeason (e) {
-        selectedSeason.value = e.target.value -1
+        selectedSeason.value = e.target.value
 
         emits('getSeason', selectedSeason.value)
         emits('changeDataStatus', 'LOADING')

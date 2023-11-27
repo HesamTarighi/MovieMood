@@ -1,6 +1,6 @@
 <template>
     <div>
-        <T_Section :title="'More Like This'">
+        <T_Section :title="'Recommendations'">
             <Swiper
                 :slides-per-group="1"
                 :slides-per-view="5"
@@ -8,7 +8,7 @@
                 :modules="swiperModules"
                 :pagination="swiperPagination"
             >
-                <!-- similar -->
+                <!-- rescommanditions -->
                 <SwiperSlide v-for="result in data.results">
                     <a :href="`/tv/${result.id}`" class="space-y-4">
                         <V_Img :imagePath="`original${result.poster_path}`" class="w-full h-[300px] rounded-2xl object-cover" />

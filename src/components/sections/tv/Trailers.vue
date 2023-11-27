@@ -3,7 +3,7 @@
         <T_Section :title="'Trailers'">
             <div>
                 <!-- trailers -->
-                <swiper
+                <!-- <swiper
                 :slides-per-view="2"
                 :slides-per-group="2"
                 :loop="true"
@@ -11,15 +11,25 @@
                 :modules="swiperModules"
                 :pagination="swiperPagination"
                 >
-                    <swiper-slide v-for="(result, i) in data.results" :key="i">
+                    <swiper-slide v-for="(trailer, i) in trailers" :key="i">
                         <a href="/" class="space-y-4">
-                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="result.key" class="h-[350px]" />
+                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="trailer.key" class="h-[350px]" />
                             <div>
-                                <span class="text-xl font-pbsans"> {{ result.name }} </span>
+                                <span class="text-xl font-pbsans"> {{ trailer.name }} </span>
                             </div>
                         </a>
                     </swiper-slide>
-                </swiper>
+                </swiper> -->
+                <div class="grid grid-cols-2">
+                    <div v-for="(trailer, i) in trailers" :key="i">
+                        <a href="/" class="space-y-4">
+                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="trailer.key" class="h-[350px]" />
+                            <div>
+                                <span class="text-xl font-pbsans"> {{ trailer.name }} </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </T_Section>
     </div>
@@ -31,7 +41,7 @@
     import YoutubeVideo from '@/components/data-display/YoutubeVideo.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     // composabels
-    import { defineProps } from 'vue'
+    import { defineProps, computed } from 'vue'
     // modules
     import { Pagination } from 'swiper/modules'
     // styles
@@ -39,7 +49,7 @@
     import 'swiper/css/pagination';
 
     // manage props
-    defineProps([
+    const props = defineProps([
         'data'
     ])
 
@@ -48,4 +58,9 @@
     const swiperPagination = {
         clickable: true,
     }
-</script>
+    const trailers = computed(() => {
+        return props.data.results.filter(result => {
+            return result.type == 'Trailer'
+        })
+    })
+;</script>

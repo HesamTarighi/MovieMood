@@ -1,11 +1,13 @@
 <template>
     <div data-theme="mytheme">
         <Layout>
-            <main class="space-y-24">
+            <main class="space-y-16">
                 <!-- hero section -->
                 <Hero />
                 <!-- Tv list ** popular ** -->
-                <List :title="'Popular'" :data="popularMovieData" :type="'tv'" />
+                <List :title="'Popular TV'" :data="popularMovieData" :type="'tv'" />
+                <!-- Tv list ** new ** -->
+                <List :title="'New Movies'" :data="newMovieData" :type="'movie'" />
                 <!-- Plans -->
                 <Plans :title="'Tariff plans'" />
                 <!-- questions -->
@@ -29,11 +31,14 @@
     import { ref, onMounted } from 'vue'
     import api from '@/composabels/api.js'
 
+    // data
     const tv = api.tv()
-    const popularMovieData = ref([])
+    const movie = api.movie()
+        // response data
+        const popularMovieData = ref([])
+        const newMovieData = ref([])
 
-    onMounted(async () => {
-        tv.getPopular()
-            .then(response => popularMovieData.value = response.data)
-    })
+    // call api
+    tv.getPopular().then(response => popularMovieData.value = response.data)
+    movie.getNew().then(response => newMovieData.value = response.data)
 </script>
