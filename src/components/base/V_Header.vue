@@ -15,8 +15,10 @@
             </div>
             <!-- signin and search -->
             <div class="w-full flex justify-end gap-8 col-span-2">
-                <input type="text" class="input w-[300px] bg-secondary" placeholder="Search" @input="search" />
+                <label for="my_modal_7" class="btn btn-secondary"> Find Movie <img :src="dynamicImage('icons/search.png')" alt="search icon" class="w-[18px]" /> </label>
                 <button class="btn btn-primary"> Sign In </button>
+
+                <SearchModal @onSearch="search" :data="searchResult" />
             </div>
         </nav>
     </header>
@@ -24,9 +26,11 @@
 
 <script setup>
     // components
-    import dynamicImage from '@/composabels/dynamic_image.js'
+    import SearchModal from '@/components/header/SearchModal.vue'
     // composabels
+    import { ref } from 'vue'
     import api from '@/composabels/api'
+    import dynamicImage from '@/composabels/dynamic_image.js'
 
     // data
     const multi = api.multi()
@@ -37,12 +41,14 @@
         { label: 'Cartoons', href: '/cartoons' },
         { label: 'Collection', href: '/collection' }
     ]
+        // response data
+        const searchResult = ref({})
 
     // functions
     function search (e) {
         const query = e.target.value
 
         multi.search(query)
-            .then(data => console.log(data))
+            .then(data => searchResult.value = data.data)
     }
 </script>
