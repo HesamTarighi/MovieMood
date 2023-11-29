@@ -55,7 +55,18 @@ function movie () {
     }
 }
 
+function multi () {
+    function search (query) {
+        return axios.get(`/search/multi?query=${query}`)
+    }
+
+    return {
+        search
+    }
+}
+
 export default {
     tv,
-    movie
+    movie,
+    multi
 }

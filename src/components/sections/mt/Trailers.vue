@@ -5,7 +5,7 @@
                 <!-- trailers -->
                 <!-- <swiper
                 :slides-per-view="2"
-                :slides-per-group="2"
+                :slides-per-group="1"
                 :loop="true"
                 :space-between="10"
                 :modules="swiperModules"
@@ -58,9 +58,9 @@
     const swiperPagination = {
         clickable: true,
     }
+
+    // computed
     const trailers = computed(() => {
-        return props.data.results.filter(result => {
-            return result.type == 'Trailer'
-        })
+        return props.data.results.filter(result => result.type == 'Trailer')
     })
 ;</script>

@@ -5,7 +5,7 @@
                 <!-- details -->
                 <Suspense>
                     <template #default>
-                        <MTDetails :data="details" />
+                        <MovieDetails :data="details" />
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
@@ -16,7 +16,7 @@
                 <!-- trailers -->
                 <Suspense>
                     <template #default>
-                        <TVTrailers :data="trailers" />
+                        <MTTrailers :data="trailers" />
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
@@ -76,11 +76,11 @@
     const callRecommendationsApi = movie.getRecommendations(id).then(response => recommendations.value = response.data)
 
     // define async components
-    const MTDetails = defineAsyncComponent(() => {
-        return Promise.all([ callDetailsApi ]).then(() => import('@/components/sections/mt/Details.vue'))
+    const MovieDetails = defineAsyncComponent(() => {
+        return Promise.all([ callDetailsApi ]).then(() => import('@/components/sections/movie/Details.vue'))
     })
-    const TVTrailers = defineAsyncComponent(() => {
-        return Promise.all([ callVideosApi ]).then(() => import('@/components/sections/tv/Trailers.vue'))
+    const MTTrailers = defineAsyncComponent(() => {
+        return Promise.all([ callVideosApi ]).then(() => import('@/components/sections/mt/Trailers.vue'))
     })
     const MTCast = defineAsyncComponent(() => {
         return Promise.all([ callCreditsApi ]).then(() => import('@/components/sections/mt/Cast.vue'))

@@ -16,6 +16,10 @@
             color: #ffffff !important;
         }
 
+        [data-theme="mytheme"] .btn-secondary:hover {
+            @apply bg-secondary/90;
+        }
+
     /* customize text */
         [data-theme="mytheme"] .link {
             @apply text-[#ffffff];
@@ -42,5 +46,12 @@
     .x-center {
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    .rtl {
+        direction: rtl;
+    }
+    .ltr {
+        direction: ltr;
     }
 }

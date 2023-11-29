@@ -6,7 +6,7 @@
                 :slides-per-view="5"
                 :space-between="50"
                 :modules="swiperModules"
-                :pagination="swiperPagination"
+                :scrollbar="swiperScrollbar"
             >
                 <!-- cast -->
                 <SwiperSlide v-for="cast in data.cast">
@@ -29,12 +29,12 @@
     import V_Img from '@/components/data-display/ServerImage.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     // modules
-    import { Pagination } from 'swiper/modules'
+    import { Scrollbar } from 'swiper/modules'
     // Import styles
     import 'swiper/css';
-    import 'swiper/css/pagination';
+    import 'swiper/css/scrollbar';
     // composabels
-    import { defineProps, computed } from 'vue'
+    import { defineProps } from 'vue'
     
     // manage props
     const props = defineProps([
@@ -42,8 +42,8 @@
     ])
 
     // data
-    const swiperModules = [ Pagination ]
-    const swiperPagination = {
-        clickable: true,
+    const swiperModules = [ Scrollbar ]
+    const swiperScrollbar = {
+        draggable: true,
     }
 ;</script>
