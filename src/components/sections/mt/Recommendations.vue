@@ -10,7 +10,7 @@
             >
                 <!-- rescommanditions -->
                 <SwiperSlide v-for="result in data.results">
-                    <a :href="`/tv/${result.id}`" class="space-y-4">
+                    <a :href="`/${result.media_type}/${result.id}`" class="space-y-4">
                         <V_Img :imagePath="`original${result.poster_path}`" class="w-full h-[300px] rounded-2xl object-cover" />
 
                         <div>

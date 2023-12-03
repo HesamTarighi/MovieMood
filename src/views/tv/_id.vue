@@ -109,7 +109,7 @@
         })
     })
     const TVEpisodes = defineAsyncComponent(() => {
-        return Promise.all([ callSeasonApi() ]).then(() => import('@/components/sections/tv/Episodes.vue'))
+        return Promise.all([ callSeasonApi(1) ]).then(() => import('@/components/sections/tv/Episodes.vue'))
     })
     const MTCast = defineAsyncComponent(() => {
         return tv.getCredits(id).then(response => {

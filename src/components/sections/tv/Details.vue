@@ -18,7 +18,7 @@
                             <!-- sort information -->
                             <ul class="flex gap-4 text-[17px] font-pbsans">
                                 <li> {{ lastAirYear }} </li>
-                                <li> {{ rating.rating }} </li>
+                                <li> {{ rating }} </li>
                                 <li> {{ data.number_of_seasons }} Sessons </li>
                                 <li> TV Series </li>
                             </ul>
@@ -53,8 +53,12 @@
         return year
     })
     const rating = computed(() => {
-        const content = props.data.content_ratings.results.find(item => item.iso_3166_1 == props.data.origin_country[0].toUpperCase())
+        try {
+            const content = props.data.content_ratings.results.find(item => item.iso_3166_1 == props.data.origin_country[0].toUpperCase())
 
-        return content
+            return content.rating
+        } catch (e) {
+            return 0
+        }
     })
 ;</script>

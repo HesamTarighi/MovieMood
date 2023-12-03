@@ -63,9 +63,13 @@
     })
 
     const rating = computed(() => {
-        const content = props.data.release_dates.results.find(item => item.iso_3166_1 == props.data.production_countries[0].iso_3166_1.toUpperCase())
+        try {
+            const content = props.data.release_dates.results.find(item => item.iso_3166_1 == props.data.production_countries[0].iso_3166_1.toUpperCase())
 
-        return content.release_dates[0]
+            return content.release_dates[0]
+        } catch (e) {
+            return 0
+        }
     })
 
     const time = computed(() => {
