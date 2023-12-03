@@ -1,10 +1,7 @@
 import axios from 'axios'
 function tv () {
     function getDetails (id) {
-        return axios.get(`/tv/${id}?language=en-US`)
-    }
-    function getContentRating (id) {
-        return axios.get(`/tv/${id}/content_ratings`)
+        return axios.get(`/tv/${id}?language=en-US&append_to_response=content_ratings`)
     }
     function getPopular () {
         return axios.get('/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc')
@@ -23,7 +20,7 @@ function tv () {
     }
 
     return {
-        getDetails, getPopular, getContentRating, getSeason, getVideos, getCredits, getRecommendations
+        getDetails, getPopular, getSeason, getVideos, getCredits, getRecommendations
     }
 }
 
@@ -35,7 +32,7 @@ function movie () {
         return axios.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&primary_release_year=${new Date().getFullYear()}`)
     }
     function getDetails (id) {
-        return axios.get(`/movie/${id}?language=en-US`)
+        return axios.get(`/movie/${id}?language=en-US&append_to_response=release_dates,translations`)
     }
     function getContentRating (id) {
         return axios.get(`/movie/${id}/content_ratings`)

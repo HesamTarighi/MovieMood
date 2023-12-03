@@ -16,13 +16,22 @@
                             <!-- name -->
                             <span class="text-3xl font-opensans"> {{ data.original_title }} </span>
                             <!-- sort information -->
-                            <ul class="flex gap-4 text-[17px] font-pbsans">
-                                <li> <span> {{ releaseDate }} </span> ({{ data.original_language.toUpperCase() }}) </li>
-                                <li class="space-x-2">
-                                    <span v-for="(genre, i) in data.genres" :key="i"> {{ genre.name }} <span v-if="i != data.genres.length -1">/ </span> </span>
-                                </li>
-                                <li> Movie </li>
-                            </ul>
+                            <div>
+                                <ul class="flex gap-3 text-[17px] font-pbsans">
+                                    <li> {{ releaseDate }} </li>
+                                    -
+                                    <li> {{ rating.certification }} </li>
+                                    -
+                                    <li> {{ time }} </li>
+                                    -
+                                    <li> Movie </li>
+                                </ul>
+                                <ul>
+                                    <li class="space-x-2">
+                                        <span v-for="(genre, i) in data.genres" :key="i"> {{ genre.name }} <span v-if="i != data.genres.length -1">/ </span> </span>
+                                    </li>
+                                </ul>
+                            </div>
                             <!-- description -->
                             <p class="font-pbsans">
                                 {{ data.overview }}
@@ -50,6 +59,21 @@
     // computed
     const releaseDate = computed(() => {
         const releaseDateArr = props.data.release_date.split('-')
-        return `${ releaseDateArr[1] }/${ releaseDateArr[2] }/${ releaseDateArr[0] }`  
+        return `${ releaseDateArr[1] }/${ releaseDateArr[2] }/${ releaseDateArr[0] }`
+    })
+
+    const rating = computed(() => {
+        const content = props.data.release_dates.results.find(item => item.iso_3166_1 == props.data.production_countries[0].iso_3166_1.toUpperCase())
+
+        return content.release_dates[0]
+    })
+
+    const time = computed(() => {
+        const content = props.data.translations.translations.find(item => item.iso_639_1 == props.data.original_language)
+        const hour = Math.floor(content.data.runtime / 60)
+        const minute = Math.floor(content.data.runtime % 60)
+        const time = hour == 0 ? `${minute}m` : `${hour}h ${minute}m`
+
+        return time
     })
 ;</script>

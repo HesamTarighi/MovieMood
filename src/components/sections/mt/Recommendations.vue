@@ -14,7 +14,7 @@
                         <V_Img :imagePath="`original${result.poster_path}`" class="w-full h-[300px] rounded-2xl object-cover" />
 
                         <div>
-                            <span class="text-xl font-pbsans"> {{ result.name }} </span>
+                            <span class="text-xl font-pbsans"> {{ result.name || result.title }} </span>
                         </div>
                     </a>
                 </SwiperSlide>

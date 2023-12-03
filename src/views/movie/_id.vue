@@ -69,23 +69,29 @@
         const credits = ref([])
         const recommendations = ref([])
 
-    // call api
-    const callDetailsApi = movie.getDetails(id).then(response => details.value = response.data)
-    const callVideosApi = movie.getVideos(id).then(response => trailers.value = response.data)
-    const callCreditsApi = movie.getCredits(id).then(response => credits.value = response.data)
-    const callRecommendationsApi = movie.getRecommendations(id).then(response => recommendations.value = response.data)
-
     // define async components
     const MovieDetails = defineAsyncComponent(() => {
-        return Promise.all([ callDetailsApi ]).then(() => import('@/components/sections/movie/Details.vue'))
+        return movie.getDetails(id).then(response => {
+            details.value = response.data
+            return import('@/components/sections/movie/Details.vue')
+        })
     })
     const MTTrailers = defineAsyncComponent(() => {
-        return Promise.all([ callVideosApi ]).then(() => import('@/components/sections/mt/Trailers.vue'))
+        return movie.getVideos(id).then(response => {
+            trailers.value = response.data
+            return import('@/components/sections/mt/Trailers.vue')
+        })
     })
     const MTCast = defineAsyncComponent(() => {
-        return Promise.all([ callCreditsApi ]).then(() => import('@/components/sections/mt/Cast.vue'))
+        return movie.getCredits(id).then(response => {
+            credits.value = response.data
+            return import('@/components/sections/mt/Cast.vue')
+        })
     })
     const MTRecommendations = defineAsyncComponent(() => {
-        return Promise.all([ callRecommendationsApi ]).then(() => import('@/components/sections/mt/Recommendations.vue'))
+        return movie.getRecommendations(id).then(response => {
+            recommendations.value = response.data
+            return import('@/components/sections/mt/Recommendations.vue')
+        })
     })
 ;</script>

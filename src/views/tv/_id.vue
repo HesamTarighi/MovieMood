@@ -46,10 +46,10 @@
                         </div>
                     </template>
                 </Suspense>
-                <!-- recommendaitions -->
+                <!-- recommendations -->
                 <Suspense>
                     <template #default>
-                        <MTRecommendations :data="recommendaitions" />
+                        <MTRecommendations :data="recommendations" />
                     </template>
                     <template #fallback>
                         <div class="w-full flex justify-center">
@@ -76,24 +76,18 @@
     const id = route.params.id
     const episodeDataStatus = ref("LOADING")
     // response data
-        const details = ref({})
+        const details = ref([])
         const trailers = ref({})
         const season = ref([])
         const credits = ref([])
-        const recommendaitions = ref([])
+        const recommendations = ref([])
 
     // functions
     function changeDataStatus (status) {
-        console.log(status)
         episodeDataStatus.value = status
     }
 
     // call api
-    const callDetailsApi = tv.getDetails(id).then(response => Object.assign(details.value, response.data))
-    const callContentRatingApi = tv.getContentRating(id).then(response => Object.assign(details.value, { content_rating: response.data }))
-    const callVideosApi = tv.getVideos(id).then(response => trailers.value = response.data)
-    const callCreditsApi = tv.getCredits(id).then(response => credits.value = response.data)
-    const callRecommendationsApi = tv.getRecommendations(id).then(response => recommendaitions.value = response.data)
     const callSeasonApi = selectedSeason => (
         tv.getSeason(id, selectedSeason).then(response => {
             season.value = response.data
@@ -103,18 +97,30 @@
 
     // define async components
     const TVDetails = defineAsyncComponent(() => {
-        return Promise.all([ callDetailsApi, callContentRatingApi ]).then(() => import('@/components/sections/tv/Details.vue'))
+         return tv.getDetails(id).then(response => {
+            details.value = response.data
+            return import('@/components/sections/tv/Details.vue')
+        })
     })
     const MTTrailers = defineAsyncComponent(() => {
-        return Promise.all([ callVideosApi ]).then(() => import('@/components/sections/mt/Trailers.vue'))
+        return tv.getVideos(id).then(response => {
+            trailers.value = response.data
+            return import('@/components/sections/mt/Trailers.vue')
+        })
     })
     const TVEpisodes = defineAsyncComponent(() => {
-        return Promise.all([ callSeasonApi(1) ]).then(() => import('@/components/sections/tv/Episodes.vue'))
+        return Promise.all([ callSeasonApi() ]).then(() => import('@/components/sections/tv/Episodes.vue'))
     })
     const MTCast = defineAsyncComponent(() => {
-        return Promise.all([ callCreditsApi ]).then(() => import('@/components/sections/mt/Cast.vue'))
+        return tv.getCredits(id).then(response => {
+            credits.value = response.data
+            return import('@/components/sections/mt/Cast.vue')
+        })
     })
     const MTRecommendations = defineAsyncComponent(() => {
-        return Promise.all([ callRecommendationsApi ]).then(() => import('@/components/sections/mt/Recommendations.vue'))
+        return tv.getRecommendations(id).then(response => {
+            recommendations.value = response.data
+            return import('@/components/sections/mt/Recommendations.vue')
+        })
     })
 ;</script>
