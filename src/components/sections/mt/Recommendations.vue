@@ -1,20 +1,20 @@
 <template>
     <div>
-        <T_Section :title="'Cast'">
+        <T_Section :title="'Recommendations'">
             <Swiper
                 :slides-per-group="1"
                 :slides-per-view="5"
                 :space-between="50"
                 :modules="swiperModules"
-                :scrollbar="swiperScrollbar"
+                :pagination="swiperPagination"
             >
-                <!-- cast -->
-                <SwiperSlide v-for="cast in data.cast">
-                    <a href="/" class="space-y-4">
-                        <V_Img :imagePath="`original${cast.profile_path}`" class="w-full h-[300px] rounded-2xl object-cover" />
+                <!-- rescommanditions -->
+                <SwiperSlide v-for="result in data.results">
+                    <a :href="`/tv/${result.id}`" class="space-y-4">
+                        <V_Img :imagePath="`original${result.poster_path}`" class="w-full h-[300px] rounded-2xl object-cover" />
 
                         <div>
-                            <span class="text-xl font-pbsans"> {{ cast.name }} </span>
+                            <span class="text-xl font-pbsans"> {{ result.name || result.title }} </span>
                         </div>
                     </a>
                 </SwiperSlide>
@@ -29,12 +29,12 @@
     import V_Img from '@/components/data-display/ServerImage.vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
     // modules
-    import { Scrollbar } from 'swiper/modules'
+    import { Pagination } from 'swiper/modules'
     // Import styles
     import 'swiper/css';
-    import 'swiper/css/scrollbar';
+    import 'swiper/css/pagination';
     // composabels
-    import { defineProps } from 'vue'
+    import { defineProps, computed } from 'vue'
     
     // manage props
     const props = defineProps([
@@ -42,8 +42,8 @@
     ])
 
     // data
-    const swiperModules = [ Scrollbar ]
-    const swiperScrollbar = {
-        draggable: true,
+    const swiperModules = [ Pagination ]
+    const swiperPagination = {
+        clickable: true,
     }
 ;</script>

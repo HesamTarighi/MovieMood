@@ -1,26 +1,26 @@
 import axios from 'axios'
 function tv () {
     function getDetails (id) {
-        return axios.get(`/tv/${id}?language=en-US`)
-    }
-    function getContentRating (id, iso) {
-        return axios.get(`https://api.themoviedb.org/3/tv/${id}/content_ratings`)
+        return axios.get(`/tv/${id}?language=en-US&append_to_response=content_ratings`)
     }
     function getPopular () {
         return axios.get('/discover/tv?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc')
     }
     function getVideos (id) {
-        return axios.get(`https://api.themoviedb.org/3/tv/${id}/videos`)
+        return axios.get(`/tv/${id}/videos`)
     }
     function getCredits (id) {
-        return axios.get(`https://api.themoviedb.org/3/tv/${id}/credits`)
+        return axios.get(`/tv/${id}/credits`)
     }
     function getSeason (id, seasonNumber) {
-        return axios.get(`https://api.themoviedb.org/3/tv/${id}/season/${seasonNumber}`)
+        return axios.get(`/tv/${id}/season/${seasonNumber}`)
+    }
+    function getRecommendations (id) {
+        return axios.get(`/tv/${id}/recommendations`)
     }
 
     return {
-        getDetails, getPopular, getContentRating, getSeason, getVideos, getCredits
+        getDetails, getPopular, getSeason, getVideos, getCredits, getRecommendations
     }
 }
 
@@ -31,9 +31,24 @@ function movie () {
     function getNew () {
         return axios.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&primary_release_year=${new Date().getFullYear()}`)
     }
+    function getDetails (id) {
+        return axios.get(`/movie/${id}?language=en-US&append_to_response=release_dates,translations`)
+    }
+    function getContentRating (id) {
+        return axios.get(`/movie/${id}/content_ratings`)
+    }
+    function getVideos (id) {
+        return axios.get(`/movie/${id}/videos`)
+    }
+    function getCredits (id) {
+        return axios.get(`/movie/${id}/credits`)
+    }
+    function getRecommendations (id) {
+        return axios.get(`/movie/${id}/recommendations`)
+    }
 
     return {
-        getPopular, getNew
+        getPopular, getNew, getDetails, getContentRating, getVideos, getCredits, getRecommendations
     }
 }
 

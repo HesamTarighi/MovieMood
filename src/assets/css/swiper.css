@@ -1,0 +1,23 @@
+/* base */
+    .swiper {
+        @apply overflow-y-visible;
+    }
+    
+/* pagination */
+    .swiper-pagination {
+        @apply -bottom-6 !important;
+    }
+    .swiper-pagination-bullet {
+        @apply bg-white opacity-80 w-[6px] h-[6px] rounded-[1000px];
+    }
+    .swiper-pagination-bullet-active {
+        @apply bg-primary w-[20px] rounded-[1000px] opacity-100;
+    }
+
+/* scrollbar */
+    .swiper-scrollbar {
+        @apply bg-white/10 -bottom-6 !important;
+    }
+    .swiper-scrollbar-drag {
+        @apply bg-primary !important;
+    }

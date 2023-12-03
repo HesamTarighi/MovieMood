@@ -47,4 +47,11 @@
         left: 50%;
         transform: translateX(-50%);
     }
+
+    .rtl {
+        direction: rtl;
+    }
+    .ltr {
+        direction: ltr;
+    }
 }

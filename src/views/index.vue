@@ -6,7 +6,6 @@
                 <Hero />
                 <!-- Tv list ** popular ** -->
                 <List :title="'Popular TV'" :data="popularMovieData" :type="'tv'" />
-
                 <!-- Tv list ** new ** -->
                 <List :title="'New Movies'" :data="newMovieData" :type="'movie'" />
                 <!-- Plans -->
