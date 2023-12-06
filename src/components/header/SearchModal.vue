@@ -5,15 +5,17 @@
         <div class="modal" role="dialog">
             <div class="modal-box space-y-8 custom-scrollbar">
                 <h3 class="text-lg font-opensans"> Find movie and TV series </h3>
-                <input type="text" class="input w-full bg-secondary" placeholder="Search" @input="$emit('onSearch', $event)" />
-                <ul class="grid grid-cols-3 gap-8">
-                    <li v-for="result in data.results">
-                        <a :href="`/${result.media_type}/${result.id}`" class="space-y-1">
-                            <V_Img :image-path="`original/${result.poster_path}`" class="w-[200px] h-[200px] rounded-lg object-cover" />
-                            <span class="text-[17px]"> {{ limit(result.original_title, 14) || limit(result.name, 14) }} </span>
-                        </a>
-                    </li>
-                </ul>
+                <input type="text" class="input w-full bg-secondary" placeholder="Search" @input="onSearch($event)" />
+                <!-- result -->
+                <SearchResult :data="data" v-if="!isEmpty && data.results && data.results != ''" />
+                <!-- Loading -->
+                <div class="w-full flex justify-center" v-if="!isEmpty && query != '' && (!data.results || data.results == '')">
+                    <span class="loading loading-ring loading-lg"></span>
+                </div>
+                <!-- empty -->
+                <div class="flex justify-center" v-if="isEmpty">
+                    <img :src="dynamicImage('images/empty.png')" class="w-[350px]" />
+                </div>
             </div>
             <label class="modal-backdrop" for="my_modal_7">Close</label>
         </div>
@@ -22,13 +24,34 @@
 
 <script setup>
     // components
-    import V_Img from '@/components/data-display/ServerImage.vue'
+    import SearchResult from '@/components/header/SearchResult.vue'
     // composabels
-    import { limit } from '@/composabels/text.js'
-    import { defineProps } from 'vue'
+    import { ref, defineProps, defineEmits } from 'vue'
+    import dynamicImage from '@/composabels/dynamic_image.js'
 
     // manage props
-    defineProps([
+    const props = defineProps([
         'data'
     ])
+    
+    // manage emits
+    const emit = defineEmits([
+        'onSearch'
+    ])
+
+    // data
+    const query = ref('')
+    const isEmpty = ref(true)
+
+    // functions
+    function onSearch (e) {
+        isEmpty.value = false
+        query.value = e.target.value
+
+        emit('onSearch', query.value)
+
+        setInterval(() => {
+            if (!props.data.results || props.data.results == '') isEmpty.value = true
+        }, 8000)
+    }
 ;</script>

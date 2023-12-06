@@ -45,9 +45,7 @@
         const searchResult = ref({})
 
     // functions
-    function search (e) {
-        const query = e.target.value
-
+    function search (query) {
         multi.search(query)
             .then(data => searchResult.value = data.data)
     }
