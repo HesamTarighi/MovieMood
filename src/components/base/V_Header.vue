@@ -15,10 +15,11 @@
             </div>
             <!-- signin and search -->
             <div class="w-full flex justify-end gap-8 col-span-2">
-                <label for="my_modal_7" class="btn btn-secondary"> Find Movie <img :src="dynamicImage('icons/search.png')" alt="search icon" class="w-[18px]" /> </label>
-                <button class="btn btn-primary"> Sign In </button>
+                <label for="my_modal_search" class="btn btn-secondary"> Find Movie <img :src="dynamicImage('icons/search.png')" alt="search icon" class="w-[18px]" /> </label>
+                <label for="my_modal_signin" class="btn btn-primary"> Sign In </label>
 
                 <SearchModal @onSearch="search" :data="searchResult" />
+                <SigninModal @onSearch="search" />
             </div>
         </nav>
     </header>
@@ -26,7 +27,8 @@
 
 <script setup>
     // components
-    import SearchModal from '@/components/header/SearchModal.vue'
+    import SearchModal from '@/components/header/search/SearchModal.vue'
+    import SigninModal from '@/components/header/signin/SigninModal.vue'
     // composabels
     import { ref } from 'vue'
     import api from '@/composabels/api'

@@ -1,70 +1,26 @@
 <template>
     <div data-theme="mytheme">
-        <Layout>
-            <main class="space-y-24">
-                <!-- details -->
-                <Suspense>
-                    <template #default>
-                        <TVDetails :data="details" />
-                    </template>
-                    <template #fallback>
-                        <div class="w-full flex justify-center">
-                            <span class="loading loading-bars loading-lg"></span>
-                        </div>
-                    </template>
-                </Suspense>
-                <!-- trailers -->
-                <Suspense>
-                    <template #default>
-                        <MTTrailers :data="trailers" />
-                    </template>
-                    <template #fallback>
-                        <div class="w-full flex justify-center">
-                            <span class="loading loading-bars loading-lg"></span>
-                        </div>
-                    </template>
-                </Suspense>
-                <!-- episodes -->
-                <Suspense>
-                    <template #default>
-                        <TVEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" :dataStatus="episodeDataStatus" @changeDataStatus="changeDataStatus" />
-                    </template>
-                    <template #fallback>
-                        <div class="w-full flex justify-center">
-                            <span class="loading loading-bars loading-lg"></span>
-                        </div>
-                    </template>
-                </Suspense>
-                <!-- cast -->
-                <Suspense>
-                    <template #default>
-                        <MTCast :data="credits" />
-                    </template>
-                    <template #fallback>
-                        <div class="w-full flex justify-center">
-                            <span class="loading loading-bars loading-lg"></span>
-                        </div>
-                    </template>
-                </Suspense>
-                <!-- recommendations -->
-                <Suspense>
-                    <template #default>
-                        <MTRecommendations :data="recommendations" />
-                    </template>
-                    <template #fallback>
-                        <div class="w-full flex justify-center">
-                            <span class="loading loading-bars loading-lg"></span>
-                        </div>
-                    </template>
-                </Suspense>
-            </main>
-        </Layout>
+        <Suspense>
+            <Layout>
+                <main class="space-y-24">
+                    <TVDetails :data="details" />
+                    <MTTrailers :data="trailers" />
+                    <TVEpisodes :details="details" @getSeason="callSeasonApi" :season="season" :id="id" :dataStatus="episodeDataStatus" @changeDataStatus="changeDataStatus" />
+                    <MTCast :data="credits" />
+                    <MTRecommendations :data="recommendations" />
+                </main>
+            </Layout>
+            <template #fallback>
+                <Loading />
+            </template>
+        </Suspense>
     </div>
 </template>
 
 <script setup>
     // components
     import Layout from '@/layouts/default.vue'
+    import Loading from '@/components/feedback/Loading.vue'
     // composabels
     import api from '@/composabels/api.js'
     import { useRoute } from 'vue-router'

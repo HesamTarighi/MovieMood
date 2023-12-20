@@ -56,7 +56,7 @@
         try {
             const content = props.data.content_ratings.results.find(item => item.iso_3166_1 == props.data.origin_country[0].toUpperCase())
 
-            return content.rating
+            return content.rating || 0
         } catch (e) {
             return 0
         }

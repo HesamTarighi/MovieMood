@@ -66,18 +66,22 @@
         try {
             const content = props.data.release_dates.results.find(item => item.iso_3166_1 == props.data.production_countries[0].iso_3166_1.toUpperCase())
 
-            return content.release_dates[0]
+            return content.release_dates[0] || 0
         } catch (e) {
             return 0
         }
     })
 
     const time = computed(() => {
-        const content = props.data.translations.translations.find(item => item.iso_639_1 == props.data.original_language)
-        const hour = Math.floor(content.data.runtime / 60)
-        const minute = Math.floor(content.data.runtime % 60)
-        const time = hour == 0 ? `${minute}m` : `${hour}h ${minute}m`
+        try {
+            const content = props.data.translations.translations.find(item => item.iso_639_1 == props.data.original_language)
+            const hour = Math.floor(content.data.runtime / 60)
+            const minute = Math.floor(content.data.runtime % 60)
+            const time = hour == 0 ? `${minute}m` : `${hour}h ${minute}m`
 
-        return time
+            return time
+        } catch (e) {
+            return ''
+        }
     })
 ;</script>
