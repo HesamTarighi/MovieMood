@@ -5,7 +5,9 @@ module.exports = {
     extend: {
       width: {
         "xl": "1800px",
-        "lg": "1300px"
+        "lg": "1280px",
+        "md": "1000px",
+        "sm": "750px"
       },
       fontFamily: {
         'pbsans': ['Public Sans'],

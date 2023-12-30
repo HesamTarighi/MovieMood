@@ -20,6 +20,10 @@
             @apply bg-secondary/90;
         }
 
+        [data-theme="mytheme"] .btn-sm {
+            @apply px-4 h-10;
+        }
+
     /* customize text */
         [data-theme="mytheme"] .link {
             @apply text-[#ffffff];
