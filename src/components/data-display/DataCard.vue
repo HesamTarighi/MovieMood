@@ -2,7 +2,7 @@
     <div>
         <a :href="`/${type}/${data.id}`">
             <div class="py-2">
-                <V_Img :image-path="`original/${data.poster_path}`" class="w-[400px] h-[400px] rounded-lg object-cover" />
+                <V_Img :image-path="`original/${data.poster_path}`" class="w-[400px] h-[400px] rounded-lg object-cover max-sm:h-[300px]" />
             </div>
             <span class="font-pbsans"> {{ data.name || data.original_title }} </span>
         </a>

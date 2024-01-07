@@ -2,12 +2,12 @@
     <div>
         <T_Section :title="'Trailers'" v-if="trailers && trailers != ''">
             <div>
-                <div class="grid grid-cols-2">
+                <div class="grid grid-cols-2 gap-6 max-md:grid-cols-1">
                     <div v-for="(trailer, i) in trailers" :key="i">
                         <a href="/" class="space-y-4">
-                            <YoutubeVideo :size="{ width: '630px', height: '320px' }" :videoKey="trailer.key" class="h-[350px]" />
+                            <YoutubeVideo :videoKey="trailer.key" class="w-[600px] h-[350px] max-xl:w-[460px] max-xl:h-[300px] max-lg:w-[330px] max-lg:h-[200px] max-md:w-full max-md:h-[250px]" />
                             <div>
-                                <span class="text-xl font-pbsans"> {{ trailer.name }} </span>
+                                <span class="text-xl font-pbsans max-lg:text-[17px]"> {{ trailer.name }} </span>
                             </div>
                         </a>
                     </div>

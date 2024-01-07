@@ -1,13 +1,11 @@
 <template>
     <T_Section :title="title">
-        <div v-if="data && data != ''">
+        <div class="w-full" v-if="data && data != ''">
             <swiper
-            :slides-per-view="4"
-            :slides-per-group="4"
             :loop="true"
-            :space-between="10"
             :modules="swiperModules"
             :pagination="swiperPagination"
+            :breakpoints="swiperOptions.breakpoints"
             >
                 <swiper-slide v-for="(result, i) in data.results" :key="i"> <Card :data="result" :type="type" /> </swiper-slide>
             </swiper>
@@ -38,5 +36,50 @@
     const swiperModules = [ Pagination ]
     const swiperPagination = {
         clickable: true,
+    }
+    const swiperOptions = {
+        // responsive carousel
+        breakpoints: {
+            // xs
+            370: {
+                spaceBetween: 10,
+                centeredSlides: true
+            },
+            // sm
+            640: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 10,
+                centeredSlides: false
+            },
+            // md
+            768: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 10,
+                centeredSlides: false
+            },
+            // lg
+            1024: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+                spaceBetween: 10,
+                centeredSlides: false
+            },
+            // xl
+            1280: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 10,
+                centeredSlides: false
+            },
+            // xxl
+            1536: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 10,
+                centeredSlides: false
+            }
+        }
     }
 ;</script>

@@ -1,6 +1,6 @@
 <template>
     <T_Section>
-        <div class="w-full flex justify-between items-center gap-40">
+        <div class="w-full flex justify-between items-center gap-40 max-xl:gap-20">
             <div class="w-full space-y-4">
                 <div class="collapse w-full border-b-2 border-secondary rounded-none" v-for="(question, i) in questions" :key="i">
                     <input type="radio" name="my-accordion-1" checked="checked" /> 
@@ -14,8 +14,8 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <img :src="dynamicImage('images/dark.jpg')" class="w-[1000px] aspect-square rounded-2xl object-cover" />
+            <div class="max-lg:hidden">
+                <img :src="dynamicImage('images/dark.jpg')" class="w-[1000px] aspect-square rounded-2xl object-cover max-xl:w-[800px]" />
             </div>
         </div>
     </T_Section>

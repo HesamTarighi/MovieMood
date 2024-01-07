@@ -29,7 +29,7 @@ function movie () {
         return axios.get('/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc')
     }
     function getNew () {
-        return axios.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=vote_count.desc&primary_release_year=${new Date().getFullYear()}`)
+        return axios.get(`/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&primary_release_year=${new Date().getFullYear()}`)
     }
     function getDetails (id) {
         return axios.get(`/movie/${id}?language=en-US&append_to_response=release_dates,translations`)

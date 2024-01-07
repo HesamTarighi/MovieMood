@@ -1,5 +1,5 @@
 <template>
-    <Modal :name="'search'" :class="'bg-base-100 w-[600px] h-[650px]'">
+    <Modal :name="'search'" class="bg-base-100 w-[600px] h-[650px] max-lg:w-[550px] max-lg:h-[600px] max-sm:h-[500px] max-sm:w-[350px]">
         <div class="space-y-8">
             <h3 class="text-lg font-opensans"> Find movie and TV series </h3>
             <input type="text" class="input w-full bg-secondary" placeholder="Search" @input="onSearch($event)" />
@@ -14,7 +14,7 @@
             </div>
             <!-- empty -->
             <div class="h-full flex justify-center items-center" v-if="isEmpty">
-                <img :src="dynamicImage('images/empty.png')" class="w-[350px]" />
+                <img :src="dynamicImage('images/empty.png')" class="w-[350px] max-sm:w-[300px]" />
             </div>
         </div>
     </Modal>

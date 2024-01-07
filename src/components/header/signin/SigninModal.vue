@@ -1,8 +1,8 @@
 <template>
-    <Modal :name="'signin'" class="w-[800px]">
+    <Modal :name="'signin'" class="w-[800px] max-lg:w-[700px] max-md:w-auto">
         <!-- form -->
-        <div class="mx-auto grid grid-cols-2 bg-base-100 rounded-lg shadow overflow-hidden">
-            <div class="h-full relative">
+        <div class="mx-auto grid grid-cols-2 bg-base-100 rounded-lg shadow overflow-hidden max-md:grid-cols-1">
+            <div class="h-full relative max-md:hidden">
                 <img class="w-full h-full object-cover object-center" :src="dynamicImage('images/form-banner.jpg')"/>
             </div>
             <div class="w-full p-8">
@@ -22,7 +22,7 @@
                         <a class="inline-block align-baseline text-sm" href="/forgot"> Forgot Password? </a>
                     </div>
                     <div class="flex w-full mt-8">
-                        <button class="btn btn-primary"> Sign in </button>
+                        <button class="btn btn-primary max-lg:btn-sm text-white"> Sign in </button>
                     </div>
                 </form>
             </div>

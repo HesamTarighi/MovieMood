@@ -1,5 +1,5 @@
 <template>
-    <ul class="grid grid-cols-3 gap-8">
+    <ul class="grid grid-cols-3 gap-8 max-sm:grid-cols-2 max-sm:gap-6">
         <li v-for="result in data.results">
             <a :href="`/${result.media_type}/${result.id}`" class="space-y-1">
                 <V_Img :image-path="`original/${result.poster_path}`" class="w-[200px] h-[200px] rounded-lg object-cover" />

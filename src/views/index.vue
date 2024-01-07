@@ -1,7 +1,7 @@
 <template>
     <div data-theme="mytheme">
         <Layout>
-            <main class="space-y-16">
+            <main class="space-y-16 max-lg:space-y-24">
                 <!-- hero section -->
                 <Hero />
                 <!-- Tv list ** popular ** -->
